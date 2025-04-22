@@ -1,14 +1,15 @@
 import json
 
 # Charger les données depuis le fichier JSON
-with open(r"C:\Users\victo\Desktop\CS\Job\rm_keys_null\herault_json.json", "r", encoding="utf-8") as file:
+with open(r"C:\Users\victo\Desktop\CS\Job\rm_keys_null\cap_agde.json", "r", encoding="utf-8") as file:
     data = json.load(file)
 
 cleaned_data = []
 
 for item in data:
-    row = item.get("row_to_json", {})
-    
+    # Directly use 'item' as the row dictionary
+    row = item
+
     if isinstance(row, dict):
         # Supprimer les champs avec valeurs nulles, vides ou listes vides
         filtered = {k: v for k, v in row.items() if v not in [None, "", []]}
@@ -24,7 +25,7 @@ for item in data:
             cleaned_data.append(filtered)
 
 # Sauvegarder le JSON nettoyé
-with open(r"C:\Users\victo\Desktop\CS\Job\rm_keys_null\resultats_herault_clean.json", "w", encoding="utf-8") as file:
+with open(r"C:\Users\victo\Desktop\CS\Job\rm_keys_null\cap_agde_clean.json", "w", encoding="utf-8") as file:
     json.dump(cleaned_data, file, ensure_ascii=False, indent=2)
 
-print("✅ Nettoyage terminé. Fichier sauvegardé : resultats_jobs_clean.json")
+print("✅ Nettoyage terminé. Fichier sauvegardé : cap_agde_clean.json")
